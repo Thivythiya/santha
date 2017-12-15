@@ -1,9 +1,11 @@
-import React from 'react'; 
-let product = [
+import React from 'react';
+import './santhaStyle';
+
+let productsList = [
 	{id:2, name: "Mobile - Moto E4 plus", price: "₹10,000"},
 	{id:3, name: "Cloth - Jeans, T-shirt", price: "₹800"},
 	{id:4, name: "Watch - Titan, fastrack", price: "₹1,500"},
-	{id:5, name: "Television - LG 80cm (32) HD LED", price: "₹17500"},
+	{id:5, name: "Television - LG 80cm (32) HD LED", price: "₹17,500"},
 	{id:6, name: "Refrigerator - Samsung 212 L Direct Cool Single Door Refrigerator", price: "₹15,400"},
 	{id:7, name: "Tablet - Honor MediaPad T3 16 GB 8 inch with Wi-Fi+4G ", price: "₹11,500"},
 	{id:8, name: "Air conditioner - Mitashi 1 Ton 5 Star Split AC ", price: "₹22,999"},
@@ -16,22 +18,22 @@ class Products extends React.Component{
 	}
 	render(){
 		return(
-			<div>
+			<div className = "product_style">
 				{
-				product.map((items, i) => {
-					return <div>
-					<ul key={i}>
-						<li>{items.name}</li>
-						<li>{items.price}</li>
-					</ul>
-					</div>
-				})			
+					productsList.map((item, i) => {
+						return <div className="each_product" key={i}>
+						<ul key={i}>
+							<li>{item.name}</li>
+							<li>{item.price}</li>
+						</ul>
+						</div>
+					})			
 			}
 		</div>	
 		)		
 	}
 }
-class Santha extends React.Component{
+class App extends React.Component{
 	constructor(){
 		super()
 		this.state = {
@@ -43,8 +45,9 @@ class Santha extends React.Component{
 	render(){
 		return 	<div>
 					<h2>{this.props.appName}</h2>
-					<div>
+					<div className = "each_product">
 						<ul>{this.state.category}
+							<li>{}</li>
 							<li>{this.state.name}</li>
 							<li>{this.state.price}</li>
 						</ul>
@@ -53,4 +56,4 @@ class Santha extends React.Component{
 				</div>
 	}
 }
-export default Santha;
+export default App;

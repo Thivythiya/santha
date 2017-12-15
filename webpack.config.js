@@ -22,13 +22,13 @@ const config = {
 				}
 			},
 			{
-				test: /\.scss$/,
-				use: [ 'style-loader', 'css-loader','sass-loader']
+				 test: /\.scss$/,
+ 			     use: ['style-loader', 'css-loader' ,'sass-loader']
 			}
 		]
 	},
 	resolve:{
-		extensions:['.js','.jsx','.css']
+		extensions:['.js','.jsx','.css','.scss']
 	},
 
 	devServer:{

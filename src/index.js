@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Santha from './components/Santha';
-ReactDOM.render(<Santha appName="Santha Products"/>, document.getElementById('root'));
+import App from './components/App';
+
+ReactDOM.render(<App appName="Santha Products"/>, document.getElementById('root'));
 
