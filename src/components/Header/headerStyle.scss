@@ -1,0 +1,23 @@
+.appheader{
+	width: 100%;
+	display: inline-block;
+	border: 1px solid black;
+	margin-bottom: 20px; 
+}
+.appheader div{
+	display: inline-block;
+	padding-left: 20px;
+}
+.appheader div h2{
+}
+.appheader ul li{
+	max-width: 100px;
+	min-width: 140px;
+	width: 10%;
+	float: left;
+
+}
+.appheader ul li a{
+	text-decoration: none;
+	padding: 10px 10px;
+}
