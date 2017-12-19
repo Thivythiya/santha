@@ -2,6 +2,8 @@ import React from 'react';
 import ProductsList from './ProductsList';
 import ProductHeader from './ProductHeader';
 import ProductFilter from './ProductFilter';
+
+
 class ProductsPage extends React.Component{
 	constructor(){
 		super()

@@ -1,5 +1,7 @@
 import React from 'react';
+
 import './productStyle';
+
 class ProductsList extends React.Component {
 	constructor(){
 		super();		
@@ -16,11 +18,16 @@ class ProductsList extends React.Component {
 					{
 						 products.map( product => {
 						return <div key={product.id}className="product-item">
-									<ul><img className = "productImage" src={product.image} />
-										<li>{product.name}</li>
-										<li>{product.price}</li>
-										<button onClick = {buttonClick}>Add to cart</button>
-									</ul>	
+									<div>
+										<img className = "productImage" src={product.image} />
+									</div>
+									<div className="product-text">
+										<ul>
+											<li>{product.name}</li>
+											<li>{product.price}</li>
+											<button onClick = {buttonClick}>Add to cart</button>
+										</ul>
+									</div>	
 								</div>
 					})
 		}

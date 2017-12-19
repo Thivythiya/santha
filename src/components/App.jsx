@@ -68,8 +68,15 @@ class APP extends React.Component{
 		return (	
 		<div id="root-app">
 			<Header countValue = {countValue}/>
-			<SideBar />
-			<ProductsPage productsList = {productsList} handleClick = {this.handleClick}/>
+		
+			<div className="container">
+				<SideBar />
+				<ProductsPage productsList = {productsList} handleClick = {this.handleClick}/>
+
+			</div>
+			
+
+			
 		</div>
 	)
 	}
