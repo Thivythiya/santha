@@ -5,7 +5,10 @@ export default class Header extends Component{
 		super()
 	}
 	render(){
-		return <div className="appheader">
+			
+		console.log("on recieving cart cout", this.props);
+
+		return <div id="appheader">
 				<div>
 					<h2>Santha</h2>
 				</div>
@@ -17,7 +20,14 @@ export default class Header extends Component{
 						<li><a href="#">Home & living</a></li>
 					</ul>
 				</div>
-				<p></p>
+				<div className="cart-details">
+					<span className="svg-shopping-icon"><i className="fa fa-shopping-bag" aria-hidden="true"></i></span>
+					<span className="cart-count"><span>{this.props.countValue}</span></span>
+				</div>
+				
+				<div className="searchbar">
+					<input type="search" placeholder="Search the products" />
+				</div>
 		</div>
 	}
 }  

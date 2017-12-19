@@ -6,27 +6,72 @@ import SideBar from './SideBar/SideBar';
 import ProductsPage from './ProductsPage/ProductsPage';
 
 let productsList = [
-		{"id":1, name: "Tymtix_Products - Sensairy", price: "₹10,000", image: "images/sensairy.jpeg"},
-		{"id":2, name: "Cloth - Jeans, T-shirt", price: "₹800", image: "images/javascript.jpg"},
-		{"id":3, name: "Watch - Titan, fastrack", price: "₹1,500", image: "images/javascript.jpg"},
-		{"id":4, name: "Television - LG 80cm (32) HD LED", price: "₹17,500", image: "images/javascript.jpg"},
-		{"id":5, name: "Refrigerator - Samsung 212 L Direct Cool Single Door Refrigerator", price: "₹15,400", image: "images/javascript.jpg"},
-		{id:6, name: "Tablet - Honor MediaPad T3 16 GB 8 inch with Wi-Fi+4G ", price: "₹11,500", image: "images/javascript.jpg"},
-		{id:7, name: "Air conditioner - Mitashi 1 Ton 5 Star Split AC ", price: "₹22,999", image: "images/javascript.jpg"},
-		{id:8, name: "Microwave Oven - Morphy Richards 25 L Convection", price: "₹9,799", image: "images/javascript.jpg"},	
-		{id:9, name: "Laptop - Apple MacBook Air Core i5 5th Gen", price: "₹56,990", image: "images"}
+		{"id":1, name: "Tymtix_Products - Sensairy-1", price: "₹10,000", image: "images/sensairy.jpeg"},
+		{"id":2, name: "Javascript", price: "₹800", image: "images/javascript.jpg"},
+		{"id":3, name: "Tymtix_Products - Sensairy-2", price: "₹1,500", image: "images/maxresdefault.jpg"},
+		{"id":4, name: "Tymtix_Products - Sensairy-3", price: "₹17,500", image: "images/Tyre.png"},
+		{"id":5, name: "Tymtix_Products - Sensairy-4", price: "₹15,400", image: "images/sensairy-1.jpg"},
+		{id:6, name: "Tymtix_Products - Sensairy-5", price: "₹11,500", image: "images/sensairy-tymtix.jpg"},
+		{id:7, name: "Tymtix_Products - Sensairy-6", price: "₹22,999", image: "images/sensairy.jpeg"},
+		{id:8, name: "Tymtix_Products - Sensairy-7", price: "₹9,799", image: "images/sensairy2.jpg"},	
+		{id:9, name: "Tymtix_Products - Sensairy-8", price: "₹56,990", image: "images/sensairy3.jpg"}
 	];
 
+let count = 1;
+
+class APP extends React.Component{
+	constructor(){
+		super()
+		this.state = {
+			count: 0
+		}
+		console.log("constructor count", count++);
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	componentWillMount(){
+
+		console.log("CPWM count", count++);
+	}
+
+	componentDidMount(){
+		console.log("CPDM count", count++);
+	}
+
+	handleClick() {
+	    this.setState(prevState => ({
+	      count: prevState.count + 1
+	    }));
+  	}
 
 
-let APP = (props) => {
-	return (
-		<div>
-			<h2>{props.appname}</h2>
-			<Header />
+  	componentWillReceiveProps(){
+  		console.log("on revicve props - APP");
+  	}
+
+	shouldComponentUpdate(){
+		console.log("Should CMUP - APP");
+		return true;
+	}
+
+	componentWillUpdate(){
+		console.log("CMWUP - APP");
+	}
+
+	componentDidUpdate(){
+		console.log("CMDUP - APP");
+	}
+
+	render(){
+		console.log("render count", count++);
+		let countValue = this.state.count;
+		return (	
+		<div id="root-app">
+			<Header countValue = {countValue}/>
 			<SideBar />
-			<ProductsPage productsList = {productsList}/>
+			<ProductsPage productsList = {productsList} handleClick = {this.handleClick}/>
 		</div>
 	)
+	}
 }
 export default APP;

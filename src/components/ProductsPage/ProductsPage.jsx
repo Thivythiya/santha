@@ -6,6 +6,25 @@ class ProductsPage extends React.Component{
 	constructor(){
 		super()
 	}
+
+
+	componentWillReceiveProps(){
+  		console.log("on revicve props - PRODTSPAGE CMP");
+  	}
+
+	shouldComponentUpdate(){
+		console.log("Should CMUP - PRODTSPAGE CMP");
+		return false;
+	}
+
+	componentWillUpdate(){
+		console.log("CMWUP - PRODTSPAGE CMP");
+	}
+
+	componentDidUpdate(){
+		console.log("CMDUP - PRODTSPAGE CMP");
+	}
+
 	render(){
 		
 		console.log("productsList - I am in product component", this.props.productsList);
@@ -16,7 +35,7 @@ class ProductsPage extends React.Component{
 					<ProductHeader />
 					<ProductFilter />
 				</div>
-				<ProductsList products = {this.props.productsList}/>
+				<ProductsList products = {this.props.productsList} buttonClick = {this.props.handleClick}/>
 			</div>	
 		)		
 	}
