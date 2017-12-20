@@ -4,7 +4,7 @@ class ProductHeader extends Component{
 		super()
 	}
 	render(){
-		return <div className="productHeader"><h3>Tymtix Products</h3></div>
+		return <div className="productHeader"><h3>Products</h3></div>
 	}
 }
 export default ProductHeader;

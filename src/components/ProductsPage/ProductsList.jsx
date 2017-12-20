@@ -14,7 +14,7 @@ class ProductsList extends React.Component {
 				return(
 					<div id="products-list">
 					{
-						 products.map( product => {
+						products.map( product => {
 						return <div key={product.id}className="product-item">
 									<div className="product-image">
 										<img src={product.image} />

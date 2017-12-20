@@ -4,16 +4,20 @@ class ProductFilter extends React.Component{
 	constructor(){
 		super()
 	}
+	
 	render(){
+	
+
 		return (<div className="productFilter">Sort by
 			<span>
-				<select>
+				<select onChange={this.props.optionChange}>
 				{
 					sortBy.map((sort,i) => {
-					 return	<option key={i}>{sort}</option>
+					 return	<option key={i} value = {sort}>{sort}</option>
 					})
 				}
 				</select>
+				
 			</span>
 		</div>);
 	}
