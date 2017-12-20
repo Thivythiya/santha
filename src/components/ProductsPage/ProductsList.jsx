@@ -1,7 +1,5 @@
 import React from 'react';
-
 import './productStyle';
-
 class ProductsList extends React.Component {
 	constructor(){
 		super();		
@@ -18,8 +16,8 @@ class ProductsList extends React.Component {
 					{
 						 products.map( product => {
 						return <div key={product.id}className="product-item">
-									<div>
-										<img className = "productImage" src={product.image} />
+									<div className="product-image">
+										<img src={product.image} />
 									</div>
 									<div className="product-text">
 										<ul>
