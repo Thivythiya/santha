@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './SideBarStyle';
 
-let brands = ['TPMS','Bluetooth TPMS', 'Wifi TPMS', 'Sensairy'];
+let category = ['sensairy','books','home appliances'];
 let prices = ['100 to 1000', '1000 to 5000', '5000 to 10000', '10000 to 20000', '20000 above'];
 export default class SideBar extends Component{
 	
@@ -10,14 +10,20 @@ export default class SideBar extends Component{
 	}
 
 	render(){
-
+		let {onCheckedFilter,onCheckedFilterPrice} = this.props;
 		return (<div className="sidebar-div">
 					<div>
-						<h4>Brand</h4>
-						<ul>
+						<h4>Categories</h4>
+						<ul> 
 							{
-								brands.map((brand,i) => {
-									return <li key={i}><input type="checkbox" />{brand}</li>
+								category.map((brand,i) => {
+									return <li key={i}>
+										<input 
+											onChange={onCheckedFilter}
+											type="checkbox"
+											value={brand} 
+
+										/>{brand}</li>
 								})
 							}	
 						</ul>
@@ -27,7 +33,12 @@ export default class SideBar extends Component{
 						<ul>
 							{
 								prices.map((price,i) => {
-									return <li key={i}><input type="checkbox" />{price}</li>
+									return <li key={i}>
+										<input 
+											onChange = {onCheckedFilterPrice} 
+											type="checkbox" 
+											value = {price}
+											/>{price}</li>
 								})
 							}
 						</ul>

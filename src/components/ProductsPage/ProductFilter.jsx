@@ -4,7 +4,6 @@ class ProductFilter extends React.Component{
 	constructor(){
 		super()
 	}
-	
 	render(){
 	
 
