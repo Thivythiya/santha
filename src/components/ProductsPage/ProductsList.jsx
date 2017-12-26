@@ -9,7 +9,6 @@ class ProductsList extends React.Component {
 		let {products,buttonClick} = this.props;
 
 		//console.log("products", this.props.products);
-
 		
 				return(
 					<div id="products-list">
@@ -22,7 +21,7 @@ class ProductsList extends React.Component {
 									<div className="product-text">
 										<ul>
 											<li>{product.name}</li>
-											<li>{product.price}</li>
+											<li>{`${product.price} INR `}</li>
 											<button onClick = {buttonClick}>Add to cart</button>
 										</ul>
 									</div>	
