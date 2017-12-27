@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './SideBarStyle';
 
-let category = ['sensairy','books','home appliances'];
+
 
 export default class SideBar extends Component{
 	
@@ -10,7 +10,7 @@ export default class SideBar extends Component{
 	}
 
 	render(){
-		let {onCheckedFilter,onCheckedFilterPrice,priceList} = this.props;
+		let {onCheckedFilter,onCheckedFilterPrice,priceList,category} = this.props;
 		return (<div className="sidebar-div">
 					<div>
 						<h4>Categories</h4>

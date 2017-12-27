@@ -4,7 +4,6 @@ import './appStyle';
 import Header from './Header/Header';
 import SideBar from './SideBar/SideBar';
 import ProductsPage from './ProductsPage/ProductsPage';
-
 let productsList = [
 		{id:1, name: "Tymtix_Products - Sensairy-1", price: 10000, image: "images/sensairy.jpeg", date: "12 Oct 2017", category: 'sensairy'},
 		{id:2, name: "Javascript", price: 800, image: "images/javascript.jpg", date: "11 Jul 2017", category: 'books'},
@@ -56,6 +55,7 @@ let pricesList = [
 		max:20000,
 	}
 ];
+let categoryList = ['sensairy','books','home appliances'];
 
 class APP extends React.Component{
 	constructor(){
@@ -64,15 +64,23 @@ class APP extends React.Component{
 			count: 0,
 			value: 'new',
 			filterVal: [],
-			filterValPrice: []
+			filterValPrice: [],
+
 		}
 		this.handleClick = this.handleClick.bind(this);
 		this.change = this.change.bind(this);
+		this.onClickChange = this.onClickChange.bind(this);
 	}
 	handleClick() {
 	    this.setState(prevState => ({
 	      count: prevState.count + 1
 	    }));
+  	}
+  	onClickChange(category){
+  		console.log("category", category);
+
+		let {filterVal=[]} = this.state;
+  		this.setState({filterVal: category})
   	}
   	change(event){
 		this.setState({value: event.target.value})
@@ -81,7 +89,7 @@ class APP extends React.Component{
 		let {filterVal=[]} = this.state;
 		console.log("filterVal",filterVal);
 		if(e.target.checked){
-			filterVal.push(e.target.value);
+			filterVal.push(e.target.value);	
 		}else{
 			filterVal.splice(filterVal.indexOf(e.target.value),1)
 		}
@@ -150,10 +158,11 @@ class APP extends React.Component{
 		
 
 
-		let {filterVal=[]} = this.state;
+		let {filterVal=[],filterValCat} = this.state;
 
 		let finalProductsList = productsList.filter(item => {
 			return filterVal.indexOf(item['category']) >= 0
+
 		});
 
 		finalProductsList = (filterVal.length == 0) ? productsList : finalProductsList;
@@ -165,6 +174,7 @@ class APP extends React.Component{
 			
 			console.log("price", price);
 			//filterValPrice.indexOf(item['range_num']) >= 0
+
 			let isInRange = false;
 			pricesList.map((item) => {
 				console.log("item", item['min'], "max", item['max']);
@@ -183,13 +193,12 @@ class APP extends React.Component{
 		}
 		return (	
 		<div id="root-app">
-			<Header countValue = {countValue}/>
+			<Header countValue = {countValue} category= {categoryList} onClickChange={this.onClickChange}/>
 			<div className="container">
-				<SideBar onCheckedFilter={this.onCheckedFilter.bind(this)} onCheckedFilterPrice = {this.onCheckedFilterPrice.bind(this)} priceList={pricesList}/>
+				<SideBar onCheckedFilter={this.onCheckedFilter.bind(this)} onCheckedFilterPrice = {this.onCheckedFilterPrice.bind(this)} category= {categoryList} priceList={pricesList}/>
 
 				<ProductsPage productsList = {finalProductsList} handleClick = {this.handleClick} change={this.change} />
-				
-			</div>	
+			</div>
 		</div>
 	)
 	}

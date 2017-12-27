@@ -1,23 +1,33 @@
 import React, {Component} from 'react';
 import './headerStyle';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+
 export default class Header extends Component{
 	constructor(){
 		super()
 	}
+
+	passClickChange(val){
+		this.props.onClickChange(val);
+	}
+
 	render(){
 			
 		console.log("on recieving cart cout", this.props);
+		let {category} = this.props;
+		//let {category,onClickChange} = this.props;
 
 		return <div id="appheader">
 				<div>
 					<h2>Santha</h2>
 				</div>
 				<div>
-					<ul>
-						<li><a href="#">Men</a></li>
-						<li><a href="#">Women</a></li>
-						<li><a href="#">Kids</a></li>
-						<li><a href="#">Home & living</a></li>
+					<ul> 
+					{
+						category.map((menu,i) => {
+							return <li key={i} onClick={this.passClickChange.bind(this,menu)}>{menu}</li>
+						})
+					}	
 					</ul>
 				</div>
 				<div className="cart-details">
