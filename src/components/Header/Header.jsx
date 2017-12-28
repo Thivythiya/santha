@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './headerStyle';
-
+import { Link } from 'react-router-dom';
 export default class Header extends Component{
 	constructor(){
 		super()
@@ -17,23 +17,30 @@ export default class Header extends Component{
 		//let {category,onClickChange} = this.props;
 
 		return <div id="appheader">
+				
 				<div>
-					<h2>Santha</h2>
+				<div>
+					<h2><Link to="/">Santha</Link></h2>
 				</div>
+
 				<div>
 					<ul> 
 					{
 						category.map((menu,i) => {
-							return <li key={i} onClick={this.passClickChange.bind(this,menu)}>{menu}</li>
+							return <li key={i} onClick={this.passClickChange.bind(this,menu)} >{menu}</li>
 						})
 					}	
 					</ul>
 				</div>
-				<div className="cart-details">
-					<span className="svg-shopping-icon"><i className="fa fa-shopping-bag" aria-hidden="true"></i></span>
-					<span className="cart-count"><span>{this.props.countValue}</span></span>
+		
+				<Link to="/cart_details">
+					<div className="cart-details">
+						<span className="svg-shopping-icon"><i className="fa fa-shopping-bag" aria-hidden="true"></i></span>
+						<span className="cart-count"><span>{this.props.countValue}</span></span>
+					</div>
+				</Link>
 				</div>
-				
+
 				<div className="searchbar">
 					<input type="search" placeholder="Search the products" />
 				</div>
