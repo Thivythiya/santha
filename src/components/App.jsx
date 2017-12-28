@@ -4,7 +4,7 @@ import './appStyle';
 import Header from './Header/Header';
 import HomePage from './HomePage';
 import Cart from './CartInfo/Cart';
-import { BrowserRouter,Route,Link } from 'react-router-dom';
+import {Route, Link } from 'react-router-dom';
 let productsList = [
 		{id:1, name: "Tymtix_Products - Sensairy-1", price: 10000, image: "images/sensairy.jpeg", date: "12 Oct 2017", category: 'sensairy'},
 		{id:2, name: "Javascript", price: 800, image: "images/javascript.jpg", date: "11 Jul 2017", category: 'books'},
@@ -62,30 +62,59 @@ class APP extends React.Component{
 	constructor(){
 		super()
 		this.state = {
-			count: 0,
-			value: 'new',
+			changeValue: 'new',
 			filterVal: [],
 			filterValPrice: [],
-
+			cartItems:[]
 		}
+
+		console.log("I am on construtor page");
+
 		this.handleClick = this.handleClick.bind(this);
 		this.change = this.change.bind(this);
 		this.onClickChange = this.onClickChange.bind(this);
 	}
-	handleClick() {
+	handleClick(product) {
+		
+		let {cartItems = []} = this.state;
+			cartItems.push(product)
+		
+
 	    this.setState(prevState => ({
-	      count: prevState.count + 1
+	      cartItems: cartItems
 	    }));
   	}
   	onClickChange(category){
   		console.log("category", category);
+  		if(!category){
 
-		let {filterVal=[]} = this.state;
-  		this.setState({filterVal: category})
+  			this.setState((prev,props) => {
+	  			return {
+					count: 0,
+					value: 'new',
+					filterVal: [],
+					filterValPrice: [],
+				}
+			});
+
+  		}else{
+  			let filterVal = []; 
+
+  			filterVal.push(category)
+
+  			this.setState({filterVal: filterVal});
+
+
+  		}
+		
   	}
   	change(event){
-		this.setState({value: event.target.value})
+		this.setState({changeValue: event.target.value})
 	}
+
+
+	
+
 	onCheckedFilter(e){
 		let {filterVal=[]} = this.state;
 		console.log("filterVal",filterVal);
@@ -106,7 +135,8 @@ class APP extends React.Component{
 		this.setState({filterValPrice:filterValPrice})  
 	}
 	render(){
-		let changeValue = this.state.value;
+		let {cartItems,changeValue,filterVal=[],filterValPrice = []} = this.state;
+
 		console.log("changeValue",changeValue)
 		function compareDesc(a,b){
 			const dateA = new Date(a.date);
@@ -154,13 +184,6 @@ class APP extends React.Component{
 			console.log("High to low",productsList);
 		}
 
-
-		let countValue = this.state.count;
-		
-
-
-		let {filterVal=[],filterValCat} = this.state;
-
 		let finalProductsList = productsList.filter(item => {
 			return filterVal.indexOf(item['category']) >= 0
 
@@ -169,7 +192,6 @@ class APP extends React.Component{
 		finalProductsList = (filterVal.length == 0) ? productsList : finalProductsList;
 
 
-		let {filterValPrice = []} = this.state;
 		
 		let isWithinRange = (price) => {
 			
@@ -193,15 +215,18 @@ class APP extends React.Component{
 			});
 		}
 		return (
-		<BrowserRouter>	
 			<div id="root-app">
-					<Header countValue = {countValue} category= {categoryList} onClickChange={this.onClickChange} /> 	
-					
+
+					<Header cartItems = {cartItems} category= {categoryList} onClickChange={this.onClickChange} /> 
+
+
 					<Route exact path="/" render={() => <HomePage onCheckedFilter={this.onCheckedFilter.bind(this)} onCheckedFilterPrice = {this.onCheckedFilterPrice.bind(this)} category= {categoryList} priceList={pricesList} productsList = {finalProductsList} handleClick = {this.handleClick} change={this.change}/> } />
+
+				
 
 					<Route path='/cart_details' component={Cart}/>
 			</div>
-		</BrowserRouter>	
+	
 	)
 	}
 }
