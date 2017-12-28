@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import APP from './components/APP';
-import { BrowserRouter,Route,Link } from 'react-router-dom';
+import { Router,Route,Link } from 'react-router-dom';
 
-ReactDOM.render((
-	<BrowserRouter>
+
+import customHistory from './components/History/customHistory';
+
+
+ReactDOM.render(
+	<Router history={customHistory}>
 		<APP />	
-	</BrowserRouter>), document.getElementById('root')
+	</Router>, document.getElementById('root')
 );
 
