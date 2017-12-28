@@ -3,10 +3,17 @@ import './productStyle';
 class ProductsList extends React.Component {
 	constructor(){
 		super();		
+
+		this.addToCartItems = this.addToCartItems.bind(this);
 	}
+
+	addToCartItems(id){
+		this.props.buttonClick(id)
+	}
+
 	render(){
 		
-		let {products,buttonClick} = this.props;
+		let {products} = this.props;
 
 		//console.log("products", this.props.products);
 		
@@ -22,7 +29,7 @@ class ProductsList extends React.Component {
 										<ul>
 											<li>{product.name}</li>
 											<li>{`${product.price} INR `}</li>
-											<button onClick = {buttonClick}>Add to cart</button>
+											<button onClick = {this.addToCartItems.bind(this,product)}>Add to cart</button>
 										</ul>
 									</div>	
 								</div>
