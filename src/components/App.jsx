@@ -2,8 +2,9 @@ import React from 'react';
 import './reset';
 import './appStyle';
 import Header from './Header/Header';
-import SideBar from './SideBar/SideBar';
-import ProductsPage from './ProductsPage/ProductsPage';
+import HomePage from './HomePage';
+import Cart from './CartInfo/Cart';
+import { BrowserRouter,Route,Link } from 'react-router-dom';
 let productsList = [
 		{id:1, name: "Tymtix_Products - Sensairy-1", price: 10000, image: "images/sensairy.jpeg", date: "12 Oct 2017", category: 'sensairy'},
 		{id:2, name: "Javascript", price: 800, image: "images/javascript.jpg", date: "11 Jul 2017", category: 'books'},
@@ -191,16 +192,18 @@ class APP extends React.Component{
 				return isWithinRange(item['price'])
 			});
 		}
-		return (	
-		<div id="root-app">
-			<Header countValue = {countValue} category= {categoryList} onClickChange={this.onClickChange}/>
-			<div className="container">
-				<SideBar onCheckedFilter={this.onCheckedFilter.bind(this)} onCheckedFilterPrice = {this.onCheckedFilterPrice.bind(this)} category= {categoryList} priceList={pricesList}/>
+		return (
+		<BrowserRouter>	
+			<div id="root-app">
+					<Header countValue = {countValue} category= {categoryList} onClickChange={this.onClickChange} /> 	
+					
+					<Route exact path="/" render={() => <HomePage onCheckedFilter={this.onCheckedFilter.bind(this)} onCheckedFilterPrice = {this.onCheckedFilterPrice.bind(this)} category= {categoryList} priceList={pricesList} productsList = {finalProductsList} handleClick = {this.handleClick} change={this.change}/> } />
 
-				<ProductsPage productsList = {finalProductsList} handleClick = {this.handleClick} change={this.change} />
+					<Route path='/cart_details' component={Cart}/>
 			</div>
-		</div>
+		</BrowserRouter>	
 	)
 	}
 }
+
 export default APP;
