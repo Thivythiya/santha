@@ -77,9 +77,8 @@ class APP extends React.Component{
 	handleClick(product) {
 		
 		let {cartItems = []} = this.state;
-			cartItems.push(product)
-		
-
+		cartItems.push(product)
+		console.log(cartItems);
 	    this.setState(prevState => ({
 	      cartItems: cartItems
 	    }));
@@ -224,7 +223,7 @@ class APP extends React.Component{
 
 				
 
-					<Route path='/cart_details' component={Cart}/>
+					<Route path='/cart_details' render={() => <Cart cartItems={cartItems}/>}/>
 			</div>
 	
 	)
