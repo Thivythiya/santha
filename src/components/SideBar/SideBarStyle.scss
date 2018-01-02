@@ -12,3 +12,41 @@ li{
 	font-size: 20px;
 	font-weight: bold;
 }
+.check-container{
+	display: block;
+	position: relative;
+	cursor: pointer;
+	padding-left:28px;
+}
+.checking{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #c3c2c9;
+    background: #fff;
+    border-radius: 2px;	
+}
+.check-container input:checked ~ .checking {
+    background-color: #2196F3;
+}
+.checking:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.check-container input:checked ~ .checking:after {
+    display: block;
+}
+.check-container .checking:after{
+	left: 5px;
+    top: 0px;
+    width: 5px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

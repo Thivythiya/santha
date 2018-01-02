@@ -18,11 +18,16 @@ export default class SideBar extends Component{
 							{
 								category.map((brand,i) => {
 									return <li key={i}>
+									<label className="check-container">
 										<input 
 											onChange={onCheckedFilter}
 											type="checkbox"
 											value={brand} 
-										/>{brand}</li>
+										/>
+										<span className="checking"></span>
+										<span>{brand}</span>
+									</label>	
+										</li>
 								})
 							}	
 						</ul>
@@ -33,11 +38,16 @@ export default class SideBar extends Component{
 							{
 								priceList.map((price,i) => {
 									return <li key={i}>
+									<label className="check-container">
 										<input 
 											onChange = {onCheckedFilterPrice} 
 											type="checkbox" 
 											value = {price.range_num}
-											/>{`${price["min"]} to ${price["max"]}`}</li>
+											/>
+											<span className="checking"></span>
+											<span>{`${price["min"]} to ${price["max"]}`}</span>
+										</label>	
+										</li>
 								})
 							}
 						</ul>

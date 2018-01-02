@@ -24,7 +24,8 @@ input[type="search"]{
 }
 
 input[type="checkbox"]{
-	width:20px;
+	position: absolute;
+	visibility: hidden;
 }
 .no-item{
 	text-align: center;
