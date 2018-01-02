@@ -3,40 +3,36 @@
 		text-align: center;
 		padding-top: 25px;
 	}
-	.quality-box{
-		display: flex;
+	.table-container{
+		box-sizing: border-box;
 	    width: 800px;
 	    margin: 50px auto;
-	    box-sizing: border-box;
-	    box-shadow: 1px 1px 5px 0px #bdbdbd;
-		.ordered-image{
-			position: relative;
-			height: 150px;
-			width: 150px;
-
-			img{
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				max-width: 100%;
-				max-height: 100%;
-				margin: auto;
-			}
-		}
-		.ordered-details{
-			padding: 10px 100px;
-    		width: 250px;
-			div{
-				padding-top: 10px;
-			}
-		}
-		.ordered-total{
-			width: 200px;
-			p{
-				    padding: 63px 0px;
-			}
-		}
+	    counter-reset: serial-number;
+	    .table-col td:first-child:before{
+	    	counter-increment: serial-number;
+	    	content: counter(serial-number);
+	    }
+	    table,th,td{
+	    	border-collapse: collapse;
+	    	border: 1px solid #cac8c8;
+	    }
+	    table{
+	    	width: 100%;
+	    	th{
+		    	font-weight: bold;
+		    	padding: 30px;
+	    	}
+	    	td{
+		    	text-align: center;
+		    	padding: 20px 60px;
+	    	}
+	    }
+	    .table-col-name{
+	    	padding-left: 25px;
+	    	text-align: left;
+	    }
+	    
 	}
+
 }
+
