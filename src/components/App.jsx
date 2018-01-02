@@ -65,17 +65,16 @@ class APP extends React.Component{
 			changeValue: 'new',
 			filterVal: [],
 			filterValPrice: [],
-			cartItems:[]
+			cartItems:[],
+			searchItem: '',
+			products: productsList
 		}
-
-		console.log("I am on construtor page");
-
 		this.handleClick = this.handleClick.bind(this);
 		this.change = this.change.bind(this);
 		this.onClickChange = this.onClickChange.bind(this);
+		this.handleSearch = this.handleSearch.bind(this);
 	}
-	handleClick(product) {
-		
+	handleClick(product) {	
 		let {cartItems = []} = this.state;
 		cartItems.push(product)
 		console.log(cartItems);
@@ -86,7 +85,6 @@ class APP extends React.Component{
   	onClickChange(category){
   		console.log("category", category);
   		if(!category){
-
   			this.setState((prev,props) => {
 	  			return {
 					count: 0,
@@ -95,25 +93,15 @@ class APP extends React.Component{
 					filterValPrice: [],
 				}
 			});
-
   		}else{
-  			let filterVal = []; 
-
+  			let filterVal = [];
   			filterVal.push(category)
-
   			this.setState({filterVal: filterVal});
-
-
-  		}
-		
+  		}	
   	}
   	change(event){
 		this.setState({changeValue: event.target.value})
 	}
-
-
-	
-
 	onCheckedFilter(e){
 		let {filterVal=[]} = this.state;
 		console.log("filterVal",filterVal);
@@ -133,8 +121,11 @@ class APP extends React.Component{
 		}
 		this.setState({filterValPrice:filterValPrice})  
 	}
+	handleSearch(e){
+		this.setState({searchItem: e.target.value});
+	}
 	render(){
-		let {cartItems,changeValue,filterVal=[],filterValPrice = []} = this.state;
+		let {cartItems,changeValue,filterVal=[],filterValPrice = [],searchItem,products} = this.state;
 
 		console.log("changeValue",changeValue)
 		function compareDesc(a,b){
@@ -148,7 +139,6 @@ class APP extends React.Component{
 			}
 			  return comparison * -1; 
 		}
-
 		function lowToHigh(a,b){
 			const priceA = parseFloat(a.price);;
 			const priceB = parseFloat(b.price);
@@ -160,7 +150,6 @@ class APP extends React.Component{
 			}
 			  return comparison; 
 		}
-
 		function highToLow(a,b){
 			const priceA = parseFloat(a.price);;
 			const priceB = parseFloat(b.price);
@@ -188,15 +177,10 @@ class APP extends React.Component{
 
 		});
 
-		finalProductsList = (filterVal.length == 0) ? productsList : finalProductsList;
-
-
-		
-		let isWithinRange = (price) => {
-			
+		finalProductsList = (filterVal.length == 0) ? productsList : finalProductsList;		
+		let isWithinRange = (price) => {			
 			console.log("price", price);
 			//filterValPrice.indexOf(item['range_num']) >= 0
-
 			let isInRange = false;
 			pricesList.map((item) => {
 				console.log("item", item['min'], "max", item['max']);
@@ -204,30 +188,26 @@ class APP extends React.Component{
 					isInRange = true;
 				}
 			});
-
 			return isInRange;
 		};
-
 		if(filterValPrice.length > 0){
 			finalProductsList = finalProductsList.filter(item => {
 				return isWithinRange(item['price'])
 			});
 		}
+		const searchingFor= (seachItem) => {
+			return function(x){
+				return x.name.toLowerCase().includes(searchItem.toLowerCase()) || x.id.toString().includes(searchItem) || x.category.toLowerCase().includes(searchItem.toLowerCase()) || !searchItem;
+			}
+		}
+		finalProductsList = finalProductsList.filter(searchingFor(searchItem));
 		return (
 			<div id="root-app">
-
-					<Header cartItems = {cartItems} category= {categoryList} onClickChange={this.onClickChange} /> 
-
-
-					<Route exact path="/" render={() => <HomePage onCheckedFilter={this.onCheckedFilter.bind(this)} onCheckedFilterPrice = {this.onCheckedFilterPrice.bind(this)} category= {categoryList} priceList={pricesList} productsList = {finalProductsList} handleClick = {this.handleClick} change={this.change}/> } />
-
-				
-
+					<Header cartItems = {cartItems} category= {categoryList} onClickChange={this.onClickChange}  handleSearch={this.handleSearch} input={searchItem}/> 
+					<Route exact path="/" render={() => finalProductsList.length !== 0 ? <HomePage onCheckedFilter={this.onCheckedFilter.bind(this)} onCheckedFilterPrice = {this.onCheckedFilterPrice.bind(this)} category= {categoryList} priceList={pricesList} productsList = {finalProductsList} handleClick = {this.handleClick} change={this.change}/> : <p className='no-item'>No items found!</p>} />			
 					<Route path='/cart_details' render={() => <Cart cartItems={cartItems}/>}/>
 			</div>
-	
-	)
+		)
 	}
 }
-
 export default APP;

@@ -15,9 +15,9 @@ export default class Header extends Component{
 		customHistory.push('/');
 	}
 	render(){
-			
+		
 		console.log("on recieving cart cout", this.props);
-		let {category,cartItems} = this.props;
+		let {category,cartItems,input,handleSearch} = this.props;
 
 		return <div id="appheader">
 				
@@ -45,7 +45,7 @@ export default class Header extends Component{
 				</div>
 
 				<div className="searchbar">
-					<input type="search" placeholder="Search the products" />
+					<input type="search" placeholder="Search the products" value={input} onChange={handleSearch}/>
 				</div>
 		</div>
 	}
