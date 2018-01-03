@@ -202,7 +202,7 @@ class APP extends React.Component{
 		finalProductsList = finalProductsList.filter(searchingFor(searchItem));
 		return (
 			<div id="root-app">
-					<Header cartItems = {cartItems} category= {categoryList} onClickChange={this.onClickChange}  handleSearch={this.handleSearch} input={searchItem}/> 
+					<Header cartItems = {cartItems} onClickChange={this.onClickChange}  handleSearch={this.handleSearch} input={searchItem}/> 
 					<Route exact path="/" render={() => finalProductsList.length !== 0 ? <HomePage onCheckedFilter={this.onCheckedFilter.bind(this)} onCheckedFilterPrice = {this.onCheckedFilterPrice.bind(this)} category= {categoryList} priceList={pricesList} productsList = {finalProductsList} handleClick = {this.handleClick} change={this.change}/> : <p className='no-item'>No items found!</p>} />			
 					<Route path='/cart_details' render={() => <Cart cartItems={cartItems}/>}/>
 			</div>

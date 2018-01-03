@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 import customHistory from '../History/customHistory';
-
+let menuItem = ['Men', 'Women', 'Kids'];
 export default class Header extends Component{
 	constructor(){
 		super()
@@ -17,7 +17,7 @@ export default class Header extends Component{
 	render(){
 		
 		console.log("on recieving cart cout", this.props);
-		let {category,cartItems,input,handleSearch} = this.props;
+		let {cartItems,input,handleSearch} = this.props;
 
 		return <div id="appheader">
 				
@@ -29,7 +29,7 @@ export default class Header extends Component{
 				<div>
 					<ul> 
 					{
-						category.map((menu,i) => {
+						menuItem.map((menu,i) => {
 							return <li key={i} onClick={this.passClickChange.bind(this,menu)}>{menu}</li>
 						})
 					}	
