@@ -29,8 +29,9 @@ class ProductsList extends React.Component {
 										<ul>
 											<li>{product.name}</li>
 											<li>{`${product.price} INR `}</li>
-											<button onClick = {this.addToCartItems.bind(this,product)}>Add to cart</button>
 										</ul>
+											<div onClick = {this.addToCartItems.bind(this,product)} className="product-base">Add to cart</div>
+
 									</div>	
 								</div>
 					})
