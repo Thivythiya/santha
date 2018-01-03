@@ -49,7 +49,8 @@ let pricesList = [
 		range_num:"3",
 		min:5000,
 		max:10000,
-	},{
+	},
+	{
 		range_num:"4",
 		min:10000,
 		max:20000,
