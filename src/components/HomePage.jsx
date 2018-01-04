@@ -8,10 +8,10 @@ export default class HomePage extends React.Component{
 		super()
 	}
 	render(){
-		let {onCheckedFilter,onCheckedFilterPrice,priceList,category,productsList,handleClick,change} = this.props;
+		let {onCheckedFilter,onCheckedFilterPrice,priceList,category,productsList,handleClick,change,filterVal,sectionCategoryList} = this.props;
 		return(
 			<div className="container">
-				<SideBar onCheckedFilter={onCheckedFilter} onCheckedFilterPrice={onCheckedFilterPrice} priceList={priceList} category={category}/>
+				<SideBar onCheckedFilter={onCheckedFilter} onCheckedFilterPrice={onCheckedFilterPrice} priceList={priceList} category={category} filterVal={filterVal} sectionCategoryList={sectionCategoryList}/>
 
 				<ProductsPage  productsList={productsList} handleClick={handleClick} change={change}/>
 			</div>

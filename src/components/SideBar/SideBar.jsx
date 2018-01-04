@@ -10,26 +10,37 @@ export default class SideBar extends Component{
 	}
 
 	render(){
-		let {onCheckedFilter,onCheckedFilterPrice,priceList,category} = this.props;
+		let {onCheckedFilter,onCheckedFilterPrice,priceList,filterVal, sectionCategoryList} = this.props;
+		console.log('filterVAl',filterVal,'sectionCategoryList',sectionCategoryList['Men']);
 		return (<div className="sidebar-div">
 					<div>
 						<h4>Categories</h4>
 						<ul> 
-							{
-								category.map((brand,i) => {
-									return <li key={i}>
-									<label className="check-container">
-										<input 
-											onChange={onCheckedFilter}
-											type="checkbox"
-											value={brand} 
-										/>
-										<span className="checking"></span>
-										<span>{brand}</span>
-									</label>	
-										</li>
-								})
-							}	
+						{(() => {
+					        if(filterVal.length==0) {
+					            return sectionCategoryList['categoryList'].map((brand,i) => {
+					     			return <SectionSideBar brand={brand} key={i} onCheckedFilter={onCheckedFilter}/>
+					     		});
+					        }if(filterVal=='Men'){
+					        	return sectionCategoryList['Men'].map((brand,i) =>{
+					     			return <SectionSideBar brand={brand} key={i} onCheckedFilter={onCheckedFilter}/>
+					        	});
+					        }if(filterVal=='Women'){
+					        	return sectionCategoryList['Women'].map((brand,i) =>{
+					     			return <SectionSideBar brand={brand} key={i} onCheckedFilter={onCheckedFilter}/>
+					        	});
+					        }if(filterVal=='Kids'){
+					        	return sectionCategoryList['Kids'].map((brand,i) =>{
+					     			return <SectionSideBar brand={brand} key={i} onCheckedFilter={onCheckedFilter}/>
+					        	});
+					        }else{
+					        	return sectionCategoryList['Others'].map((brand,i) =>{
+					     			return <SectionSideBar brand={brand} key={i} onCheckedFilter={onCheckedFilter}/>
+					        	});
+					        }
+					        
+					      })()}
+								
 						</ul>
 					</div>
 					<div>
@@ -56,5 +67,16 @@ export default class SideBar extends Component{
 		);
 	}
 }
-
-
+const SectionSideBar = (props) => {
+	return <li>
+		<label className="check-container">
+			<input 
+				onChange={props.onCheckedFilter}
+				type="checkbox"
+				value={props.brand} 
+			/>
+			<span className="checking"></span>
+			<span>{props.brand}</span>
+		</label>	
+	</li>
+}

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 import customHistory from '../History/customHistory';
-let menuItem = ['Men', 'Women', 'Kids'];
+let menuItem = ['Men', 'Women', 'Kids', 'Others'];
 export default class Header extends Component{
 	constructor(){
 		super()
