@@ -4,6 +4,8 @@ import './appStyle';
 import Header from './Header/Header';
 import HomePage from './HomePage';
 import Cart from './CartInfo/Cart';
+import Buy from './Buy/Buy';
+import Cancel from './Buy/Cancel';
 import {Route, Link } from 'react-router-dom';
 let productsList = [
 		{id:1, name: "Tymtix_Products - Sensairy-1", price: 10000, image: "images/sensairy.jpeg", date: "12 Oct 2017", category: 'sensairy'},
@@ -33,7 +35,21 @@ let productsList = [
 		{id:25, name: "C++", price: 380, image: "images/cplus.jpg", date: "01 Feb 2016",category: 'books' },
 		{id:26, name: "Mathematics", price: 399, image: "images/mathematics.jpg", date: "03 Jun 2016",category: 'books' },
 		{id:27, name: "Responsive Web design", price: 483, image: "images/responsive-webdesign.png", date: "08 Jan 2016",category: 'books' },
-		{id:28, name: "Web Technology", price: 690, image: "images/web-technologies.jpeg", date: "14 Nov 2016",category: 'books' }
+		{id:28, name: "Web Technology", price: 690, image: "images/web-technologies.jpeg", date: "14 Nov 2016",category: 'books' },
+		{id:29, name: "T-shirt", price: 300, image: "images/Men-1.jpg", date: "19 Oct 2017",category: 'Men' },
+		{id:30, name: "White T-shirt", price: 1200, image: "images/Men-2.jpg", date: "01 Jan 2018",category: 'Men' },
+		{id:31, name: "Campus sutra Jacket", price: 1699, image: "images/Men-3.jpg", date: "01 May 2016",category: 'Men' },
+		{id:32, name: "Jacket", price: 2500, image: "images/Men-4.jpg", date: "05 Jul 2015", category: 'Men'},
+		{id:33, name: "Chiffon saree", price: 1500, image: "images/Women-1.jpg", date: "29 Jun 2016", category: 'Women'},
+		{id:34, name: "Blue with sandal saree", price: 600, image: "images/Women-2.jpg", date: "31 Jul 2015", category: 'Women'},
+		{id:35, name: "Pink silk saree", price: 500, image: "images/Women-3.jpg", date: "25 Jan 2015", category: 'Women'},
+		{id:36, name: "Lycra saree", price: 4500, image: "images/Women-4.jpg", date: "04 Oct 2017", category: 'Women'},
+		{id:37, name: "Mini Klub", price: 500, image: "images/mini-klub.jpg", date: "28 Jun 2017", category: 'Kids'},
+		{id:38, name: "Beebay", price: 399, image: "images/beebay.jpg", date: "29 Mar 2017", category: 'Kids'},
+		{id:39, name: "Girls printed Yk", price: 1195, image: "images/girls-printed-yk.jpg", date: "02 Jan 2018", category: 'Kids'},
+		{id:40, name: "Peppermint", price: 345, image: "images/peppermint.jpg", date: "16 Aug 2016", category: 'Kids'},
+		{id:41, name: "Mothercare clothes", price: 726, image: "images/mothercare-clothes.jpg", date: "20 Mar 2016", category: 'Kids'},
+
 	];
 
 let pricesList = [
@@ -76,11 +92,17 @@ class APP extends React.Component{
 	}
 	handleClick(product) {	
 		let {cartItems = []} = this.state;
-		cartItems.push(product)
-		console.log(cartItems);
-	    this.setState(prevState => ({
-	      cartItems: cartItems
-	    }));
+		console.log('product',product);
+		if(cartItems.length == 0){
+			cartItems.push(product);
+			this.setState({cartItems:cartItems})	
+		}else{
+			let isExist = false;
+			for(var y in cartItems){
+				isExist = (product.id === cartItems[y].id) ? true : isExist;
+			}
+			(!isExist) ? (cartItems.push(product),this.setState({cartItems: cartItems})) : "";
+		}
   	}
   	onClickChange(category){
   		console.log("category", category);
@@ -204,8 +226,13 @@ class APP extends React.Component{
 		return (
 			<div id="root-app">
 					<Header cartItems = {cartItems} onClickChange={this.onClickChange}  handleSearch={this.handleSearch} input={searchItem}/> 
-					<Route exact path="/" render={() => finalProductsList.length !== 0 ? <HomePage onCheckedFilter={this.onCheckedFilter.bind(this)} onCheckedFilterPrice = {this.onCheckedFilterPrice.bind(this)} category= {categoryList} priceList={pricesList} productsList = {finalProductsList} handleClick = {this.handleClick} change={this.change}/> : <p className='no-item'>No items found!</p>} />			
-					<Route path='/cart_details' render={() => <Cart cartItems={cartItems}/>}/>
+
+					<Route exact path="/" render={() => finalProductsList.length !== 0 ? <HomePage onCheckedFilter={this.onCheckedFilter.bind(this)} onCheckedFilterPrice = {this.onCheckedFilterPrice.bind(this)} category= {categoryList} priceList={pricesList} productsList = {finalProductsList} handleClick = {this.handleClick} change={this.change}/> : <p className='no-item'>No items found!</p>} />	
+
+					<Route path='/cart_details' render={() =>cartItems.length !== 0 ? <Cart cartItems={cartItems}/> : <p className='no-item'>Your cart is empty</p> }/>
+
+					<Route path='/buy' component={Buy}/>
+					<Route path='/cancel' component={Cancel}/>
 			</div>
 		)
 	}
