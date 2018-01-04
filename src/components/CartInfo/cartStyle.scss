@@ -37,8 +37,29 @@
 	    	padding-left: 25px;
 	    	text-align: left;
 	    }
-	    
 	}
+	.buy-cancel{
+		margin:auto;
+		width: 500px;
+		.product-buy{
+	    	width: 100px;
+		    text-align: center;
+		    padding: 10px;
+		    color: white;
+		    background: green;
+		    border-radius: 5px;
+	    }
+	    .product-cancel{
+	    	width: 100px;
+		    margin: 30px;
+		    text-align: center;
+		    padding: 10px;
+		    color: white;
+		    background: red;
+		    border-radius: 5px;
+	    }
+	}
+ 	
 
 }
 

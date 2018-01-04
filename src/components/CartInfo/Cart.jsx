@@ -1,6 +1,6 @@
 import React from 'react';
 import './cartStyle';
-
+import { Link } from 'react-router-dom';
 let quantity = [1,2,3,4,5,6,7,8,9,10]
 
 class CartDetails extends React.Component{
@@ -105,6 +105,14 @@ class Cart extends React.Component{
 							</tbody>
 						</table>
 					</div>
+					<div className="buy-cancel">
+						<Link to="/buy">
+							<span className="product-buy">Buy Now</span>
+						</Link>	
+						<Link to="/cancel">
+							<span className="product-cancel">Cancel</span>
+						</Link>
+					</div>	
 				</div>
 			</div>
 		)
