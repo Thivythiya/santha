@@ -1,5 +1,5 @@
 import React from 'react';
-let sortBy = ['new', 'low to high', 'high to low'];
+import appData from '../../appData';
 class ProductFilter extends React.Component{
 	constructor(){
 		super()
@@ -11,8 +11,8 @@ class ProductFilter extends React.Component{
 			<span>
 				<select onChange={this.props.optionChange}>
 				{
-					sortBy.map((sort,i) => {
-					 return	<option key={i} value = {sort}>{sort}</option>
+					appData.sortBy.map((sort,i) => {
+					 return	<option key={i} value = {sort.id}>{sort.value}</option>
 					})
 				}
 				</select>

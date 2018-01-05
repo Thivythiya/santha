@@ -24,11 +24,15 @@ const config = {
 			{
 				 test: /\.scss$/,
  			     use: ['style-loader', 'css-loader' ,'sass-loader']
+			},
+			{
+				test: /\.json$/,
+        		loader: 'json-loader'
 			}
 		]
 	},
 	resolve:{
-		extensions:['.js','.jsx','.css','.scss']
+		extensions:['.js','.jsx','.css','.scss','.json']
 	},
 
 	devServer:{
